@@ -1,0 +1,7 @@
+---
+    #-name: Run the register spectrum protect playbook
+    - include: register-sp-node.yml
+      static: yes
+    #-name: Run the install spectrum protect playbook
+    - include: setup-sp-system-v.yml
+      static: yes

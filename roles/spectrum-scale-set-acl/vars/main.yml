@@ -1,0 +1,6 @@
+---
+# vars file for roles/spectrum-scale-set-recursive-acl
+
+    directory: /uod/lfs/dif/omx
+    ansible_user: root
+    group: omxstorageadmin

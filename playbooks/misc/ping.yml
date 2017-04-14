@@ -1,0 +1,12 @@
+---
+- hosts: all
+  gather_facts: False
+
+  vars_files:
+    #- secret-N1
+    #- secret-kn
+    - swong-user
+
+  tasks:
+    - name: Ping all hosts
+      ping:

@@ -1,0 +1,13 @@
+---
+- hosts: all
+  gather_facts: False
+
+  vars_files:
+    - secret-N1
+    #- secret-kn
+    #- swong-user
+
+  - include: ping.yml
+  - include: N1.yml
+  - include: kn.yml
+

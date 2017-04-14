@@ -1,0 +1,21 @@
+---
+# tasks file for roles/rhel7-setup
+
+    - include: .yml
+      static: no
+
+Register RHEL
+
+Install applications
+
+Copy config files
+
+ConfigureAD
+
+Disable services running
+
+Enable services
+
+Register with domain
+
+

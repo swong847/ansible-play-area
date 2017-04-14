@@ -1,0 +1,22 @@
+---
+    #-name: Run the register spectrum protect playbook
+    - include: register-sp-node.yml
+      static: no
+    #name: Install SP
+    - include: sp-install.yml
+      static: no
+    #-name: Run the install spectrum protect playbook
+    - include: setup-sp-system-d.yml
+      static: no
+      become: true
+      become_method: sudo
+   #-name: Run the Spectrum Protect config
+    - include: sp-copy-config.yml
+      static: no
+      become: true
+      become_method: sudo
+    
+    - include: sp-set-password.yml
+      static: no
+      become: true
+      become_method: sudo

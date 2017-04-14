@@ -1,0 +1,30 @@
+---
+    - name: List directories and capture variable
+      command: "ls {{directory}}"
+      register: dir_out
+
+#    - name: Create dir
+#      file: path=/root/tmp state=directory
+
+#    - name: Copy ACL
+#      template: src=standard.acl.j2 dest=/root/tmp/{{item}}.acl
+#      with_items: "{{ dir_out.stdout_lines }}"
+
+    - name: Copy block of text into file
+      shell: |
+          echo '#NFSv4 ACL
+          #owner: root
+          #group:lsd
+          user:{{ item }}:rwxc:allow:FileInherit:DirInherit
+          (X)READ/LIST (X)WRITE/CREATE (X)APPEND/MKDIR (X)SYNCHRONIZE (X)READ_ACL  (X)READ_ATTR  (X)READ_NAMED
+          (X)DELETE    (X)DELETE_CHILD (X)CHOWN        (X)EXEC/SEARCH (X)WRITE_ACL (X)WRITE_ATTR (X)WRITE_NAMED
+
+          group:{{ group }}:rwxc:allow:FileInherit:DirInherit
+          (X)READ/LIST (X)WRITE/CREATE (X)APPEND/MKDIR (X)SYNCHRONIZE (X)READ_ACL  (X)READ_ATTR  (X)READ_NAMED
+          (X)DELETE    (X)DELETE_CHILD (X)CHOWN        (X)EXEC/SEARCH (X)WRITE_ACL (X)WRITE_ATTR (X)WRITE_NAMED' | /usr/lpp/mmfs/bin/mmputacl {{directory}}/{{item}}
+      with_items: "{{ dir_out.stdout_lines }}"      
+      ignore_errors: yes
+#    - name: Set the users permissions
+#      command: /usr/lpp/mmfs/bin/mmputacl -i tmp/{{item}}.acl {{directory}}/{{item}}
+#      with_items: "{{ dir_out.stdout_lines }}"
+

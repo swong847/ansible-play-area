@@ -1,0 +1,32 @@
+# Author: Simon Wong <swong@dundee.ac.uk>
+# Playbook created 22032017 by UoD-IT-RC
+# Purpose: The purpose of this playbook is to install and configure Spectrum Protect for System V configured systems
+# Actions: Sets up repo, installs client, copies file settings and starts service
+# Outstanding: Create node on SP server, sets password, copies .sys and .opt file settings correctly and then starts incremental back up
+
+---
+
+    - include: install-sp.yml
+      static: yes
+
+    - name: configure DSMCAD
+      copy: src=dsmcad dest=/etc/init.d/dsmcad force=yes
+
+    - name: Change file permissions
+      file:
+        path: /etc/init.d/dsmcad
+        owner: root
+        group: root
+        mode: 0755
+
+    - name: Create symbolic link
+      file: src=/opt/tivoli/tsm/client/lang/EN_US dest=/opt/tivoli/tsm/client/ba/bin/EN_US state=link 
+
+    - include: copy-sp-dsm-files.yml
+      static: yes
+
+    - name: Set the first log in for SP
+      command: dsmc set password {{sp_register_password}} {{sp_register_password}}
+      ignore_errors: yes
+ 
+

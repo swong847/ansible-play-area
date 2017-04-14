@@ -1,0 +1,16 @@
+---
+    - name: List directories and capture variable
+      command: "ls {{directory}}"
+      register: dir_out
+
+    - name: Create dir
+      file: path=/root/tmp state=directory
+
+    - name: Copy ACL
+      template: src=standard.acl.j2 dest=/root/tmp/{{item}}.acl
+      with_items: "{{ dir_out.stdout_lines }}"
+
+    - name: Set the users permissions
+      command: /usr/lpp/mmfs/bin/mmputacl -i tmp/{{item}}.acl {{directory}}/{{item}}
+      with_items: "{{ dir_out.stdout_lines }}"
+

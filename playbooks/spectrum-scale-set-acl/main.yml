@@ -1,0 +1,5 @@
+---
+- hosts: lfs
+  roles:
+    - spectrum-scale-set-acl
+

@@ -1,0 +1,8 @@
+# Author: Simon Wong <swong@dundee.ac.uk>
+# Playbook created 11042017 by UoD-IT-RC
+# Purpose: The purpose of this playbook is to configure RHEL systems to a base standard
+---
+- hosts: systemd
+  roles:
+    - rhel7-setup
+

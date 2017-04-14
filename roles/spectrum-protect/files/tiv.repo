@@ -1,0 +1,7 @@
+[TSM]
+name=Tivoli Storage Manager Enterprise Packages for Enterprise Linux 7
+baseurl=http://spacewalk.lifesci.dundee.ac.uk/pub/TSM/tsm81/
+enabled=1
+priority=10
+gpgcheck=0 
+

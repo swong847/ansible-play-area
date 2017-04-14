@@ -1,0 +1,20 @@
+# Author: Simon Wong <swong@dundee.ac.uk>
+# Playbook created 30032017 by UoD-IT-RC
+# Purpose: The purpose of this task is to uninstall the client
+# Actions: Remove the SP client installed
+# README: 
+
+---
+
+    - name: Remove the Repo
+      file: path=/etc/yum.repos.d/tiv.repo state=absent
+ 
+    - name: Uninstall SP Packages
+      yum: pkg={{ item }} state=removed
+      with_items:
+       - gskcrypt64.x86_64
+       - gskssl64.x86_64
+       - TIVsm-API64
+       - TIVsm-BA
+       - TIVsm-APIcit
+       - TIVsm-BAcit

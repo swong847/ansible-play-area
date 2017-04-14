@@ -1,0 +1,6 @@
+---
+# defaults file for roles/lfs-create-fileset
+
+    fsPath: "/uod/lfs/"
+    fsName: "gpfs-lfs"
+    byte: "T"
