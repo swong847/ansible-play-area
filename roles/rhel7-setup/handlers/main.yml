@@ -3,3 +3,6 @@
     
    - name: restart rhsmcertd
      systemd: name=rhsmcertd state=restarted
+
+   - name: restart sssd
+     systemd: name=sssd state=restarted

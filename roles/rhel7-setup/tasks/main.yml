@@ -10,7 +10,11 @@
 
      - name: RHEL7 setup | Register with RHEL
        command: subscription-manager register --username {{rhel_username}} --password {{rhel_password}}
+       ignore_errors: yes
 
+     - name: RHEL7 setup | Refresh join
+       command: subscription-manager attach --auto
+       
      - name: RHEL7 setup | Make group directory
        file: path={{item}} state=directory
        with_items:
@@ -19,11 +23,11 @@
      - name: RHEL7 setup | Install relevent rpms
        yum: state=present name={{item}}
        with_items: 
-         - adcli
+        # - adcli
          - biosdevname
          - dstat
          - gcc
-         - iftop
+        # - iftop
          - kernel-devel
          - krb5-workstation
          - lsof
@@ -41,52 +45,62 @@
          - sssd
          - strace
 
-     - name: RHEL7 setup | Copy files to /etc
+     - name: RHEL7 setup | Copy files to location
        copy: src={{ item.src }} dest={{ item.dest }}
        with_items:
          - { src: 'syslog.conf', dest: '/etc/syslog.conf' }
-         - { src: 'rhnsd', dest: '/etc/sysconfig/rhn/rhnsd' }
-         - { src: 'sudoers', dest: '/etc/sudoers' }
-         - { src: 'sssd.conf', dest: '/etc/sssd/sssd.conf' }
-         - { src: 'snmpd.conf', dest: '/etc/snmpd/snmpd.conf' }
          - { src: 'selinux', dest: '/etc/sysconfig/selinux' }
          - { src: 'cron_access.conf', dest: '/etc/security/cron_access.conf' }
-         - { src: 'access.conf', dest: '/etc/security/access.conf' }
-         - { src: 'smb.conf', dest: '/etc/samba/smb.conf' }
          - { src: 'crond', dest: '/etc/pam.d/crond' }
-         - { src: 'ntp.conf', dest: '/etc/ntp.conf' }
-         - { src: 'ntp.conf', dest: '/etc/nsswitch.conf' }
-         - { src: 'krb5.conf', dest: '/etc/krb5.conf' }
+         - { src: 'nsswitch.conf', dest: '/etc/nsswitch.conf' }
          - { src: 'inittab', dest: '/etc/inittab' }
          - { src: 'rescan.sh', dest: '/usr/bin/rescan.sh' }
+         - { src: 'rhnsd', dest: '/etc/sysconfig/rhn/rhnsd' }
+         - { src: 'sshd_config', dest: '/etc/ssh/sshd_config' }
+
+     - name: RHEL7 setup | Copy template files
+       template: src={{ item.src }} dest={{ item.dest }}
+       with_items:
+         - { src: 'sudoers', dest: '/etc/sudoers' }
+         - { src: 'sssd.conf', dest: '/etc/sssd/sssd.conf' }
+         - { src: 'snmpd.conf', dest: '/etc/snmp/snmpd.conf' }
+         - { src: 'access.conf', dest: '/etc/security/access.conf' }
+         - { src: 'smb.conf', dest: '/etc/samba/smb.conf' }
+         - { src: 'ntp.conf', dest: '/etc/ntp.conf' }
+         - { src: 'krb5.conf', dest: '/etc/krb5.conf' }
+
+     - name: RHEL7 setup | Change sssd file permissions
+       file: 
+         path: '/etc/sssd/sssd.conf'
+         mode: 0600
 
      - name: RHEL7 setup | Configure AD 
-       command: authconfig --enableshadow --enablemd5 --disableldap --disableldapauth --enablekrb5 --krb5realm=AD.LIFESCI.DUNDEE.AC.UK --enablekrb5kdcdns --enablekrb5realmdns --smbsecurity=ads --smbworkgroup=lifesci-ad --smbrealm=AD.LIFESCI.DUNDEE.AC.UK --enablelocauthorize --enablemkhomedir --enablepamaccess --enablesssd --enablesssdauth --update
+       command: authconfig --enableshadow --enablemd5 --disableldap --disableldapauth --enablekrb5 --krb5realm={{domain}} --enablekrb5kdcdns --enablekrb5realmdns --smbsecurity=ads --smbworkgroup={{smb_workgroup}} --smbrealm={{domain}} --enablelocauthorize --enablemkhomedir --enablepamaccess --enablesssd --enablesssdauth --update
 
      - name: RHEL7 setup | Disable systemd
        systemd: state=stopped enabled=no name={{item}}
        with_items:
          - autofs.service
-         - avahi-daemon.service
+        # - avahi-daemon.service
          - bluetooth.target
          - chronyd.service
-         - cups
+        # - cups
          - firewalld.service
-         - gpm
-         - hidd
-         - iptables
-         - iptables6
-         - mcstrans
+        # - gpm
+        # - hidd
+        # - iptables
+        # - iptables6
+        # - mcstrans
          - mdmonitor
-         - netfs
+        # - netfs
          - nfs-lock.service
-         - pcscd
-         - portmap
-         - restorecond
+        # - pcscd
+        # - portmap
+        # - restorecond
          - rpcgssd
          - rpcidmapd
          - smartd.service
-         - winbind
+        # - winbind
 
      - name: RHEL7 setup | Enable and start systemd
        systemd: state=started enabled=yes name={{item}}
@@ -97,9 +111,11 @@
          - oddjobd
          - smb
          - sssd
+       ignore_errors: yes
 
      - name: RHEL7 setup | Register with domain
-       command: net ads join createcomputer=lifesci/linux -U ghost-x%Z0h_xXY60sVf9a6m
+       command: net ads join createcomputer=lifesci/linux -U {{netjoin_user}}
+       notify: restart sssd
 
      - name: RHEL7 setup | Copy yum epel repo
        copy: src=epel.repo dest=/etc/yum.repos.d/epel.repo
