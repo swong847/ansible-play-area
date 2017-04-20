@@ -1,7 +1,7 @@
 galaxy_info:
-  author: your name
-  description: your description
-  company: your company (optional)
+  author: Simon Wong
+  description: Ansible role to setup and configure a RHEL7 system out the box.
+  company: UoD-IT
 
   # If the issue tracker for your role is not on github, uncomment the
   # next line and provide a value
@@ -156,12 +156,12 @@ galaxy_info:
   #  versions:
   #  - all
   #  - any
-  #- name: EL
+  - name: EL
   #  versions:
   #  - all
   #  - 5
   #  - 6
-  #  - 7
+    - 7
   #- name: Windows
   #  versions:
   #  - all
