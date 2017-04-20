@@ -1,4 +1,4 @@
-Role Name
+RHEL 7 Setup
 =========
 
 This role was created to help automate the setup new RHEL 7 out-the-box systems.  The purpose of this playbook was drafted from a previous sys_build/spacewalk script setup by {jjdoward}.  
