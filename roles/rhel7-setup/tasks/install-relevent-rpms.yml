@@ -1,0 +1,26 @@
+---
+
+     - name: RHEL7 setup | Install relevent rpms
+       yum: state=present name={{item}}
+       with_items:
+        # - adcli
+         - biosdevname
+         - dstat
+         - gcc
+        # - iftop
+         - kernel-devel
+         - krb5-workstation
+         - lsof
+         - m2crypto
+         - make
+         - net-snmp
+         - ntp
+         - oddjob
+         - oddjob-mkhomedir
+         - pam_krb5
+         - realmd
+         - samba-common
+         - screen
+         - sendmail-cf
+         - sssd
+         - strace

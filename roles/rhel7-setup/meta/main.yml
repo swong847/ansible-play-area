@@ -7,9 +7,13 @@ galaxy_info:
 
   min_ansible_version: 1.2
 
-  - name: EL
-    - 7
+  platorms:
+  - name: E
+    versions:
+      - 7
 
-  galaxy_tags: []
-
-dependencies: []
+  galaxy_tags: 
+    - system
+    - rhel7
+ 
+  dependencies: []
