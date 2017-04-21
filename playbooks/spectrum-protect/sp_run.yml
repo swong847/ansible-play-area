@@ -15,7 +15,7 @@
 #  become_method: sudo
 
   vars_files:
-    - sp-auth
+    - auth
 
   vars_prompt:
     - name: "sp_domain"

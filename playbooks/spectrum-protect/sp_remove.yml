@@ -11,6 +11,6 @@
   gather_facts: yes
 
   vars_files:
-    - sp-auth
+    - auth
 
 
