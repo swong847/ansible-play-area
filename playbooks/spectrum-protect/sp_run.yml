@@ -7,7 +7,7 @@
 ## ** An issue will occur at the end of the playbook if the register node does not match the systems host file e.g. SP Server node is simon and the system host is simon.lifesci.dundee.ac.uk.  These need to match.  Alternatively the ACL's need opened.
 
 ---
-- hosts: xibo
+- hosts: npsc
   roles:
     - spectrum-protect
   gather_facts: yes

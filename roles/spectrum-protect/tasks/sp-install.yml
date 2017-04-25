@@ -6,7 +6,7 @@
       become_method: sudo
 
     - name: Install SP Packages
-      yum: pkg={{ item }} state=present
+      yum: pkg={{ item }} state=latest
       with_items:
        - gskcrypt64.x86_64
        - gskssl64.x86_64
