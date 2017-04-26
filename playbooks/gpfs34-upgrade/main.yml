@@ -1,0 +1,7 @@
+---
+- hosts: fs0-dev
+#- hosts: "{{ target }}"
+  roles: 
+    - gpfs34-upgrade
+
+  gather_facts: true

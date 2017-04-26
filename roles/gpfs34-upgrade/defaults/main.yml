@@ -1,0 +1,5 @@
+---
+# defaults file for roles/gpfs34-upgrade
+
+gpfs_repo_url_base: "http://spacewalk.lifesci.dundee.ac.uk/pub/gpfs/x86_64/3.5.0/base/"
+gpfs_repo_url_updates: "http://spacewalk.lifesci.dundee.ac.uk/pub/gpfs/x86_64/3.5.0/updates/"

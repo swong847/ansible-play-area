@@ -1,0 +1,47 @@
+---
+# tasks file for roles/gpfs34-upgrade
+
+#     - name: gpfs | current kernel version
+#       fail:
+#         msg: "Current kernel {{ ansible_kernel }} must match specified GPFS kernel {{ gpfs_kernel_version }}"
+#       when: {{ ansible_kernel }} != 2.6.32-279.2.1.el6.x86_64 
+
+     - name: gpfs | setup repository
+       template:
+         dest: /etc/yum.repos.d/gpfs.repo
+         src: gpfs-repo.j2
+
+     - name: gpfs | install system requirements
+       yum:
+         name: "{{ item }}"
+         state: present
+       with_items:
+       - cpp
+       - kernel-devel
+       - kernel-headers
+       - kernel-tools
+       - kernel-tools-libs
+       - rpm-build
+       - gcc-c++
+
+     - name: gpfs | install rpms
+       yum:
+         name: "{{ item }}"
+         state: present
+         disable_gpg_check: yes
+       with_items:
+       - gpfs.base
+       - gpfs.docs
+       - gpfs.gpl
+       - gpfs.msg.en_US
+
+     - name: gpfs | build kernel module
+       command: /usr/lpp/mmfs/bin/mmbuildgpl --buildrpm
+       args:
+         creates: "{{ gpfs_kernel_rpm }}"
+
+     - name: gpfs | install kernel module
+       yum:
+         name: "{{ gpfs_kernel_rpm }}"
+         state: present
+
