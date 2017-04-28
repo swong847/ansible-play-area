@@ -6,28 +6,16 @@
          dest: /etc/yum.repos.d/gpfs.repo
          src: gpfs-repo.j2
 
-     - name: gpfs | install system requirements
-       yum:
-         name: "{{ item }}"
-         state: present
-       with_items:
-       - cpp
-       - kernel-devel
-       - kernel-headers
-       - rpm-build
-       - gcc-c++
-       - openssl-devel
-
      - name: gpfs | install rpms
        yum:
          name: "{{ item }}"
          state: present
          disable_gpg_check: yes
        with_items:
-       - gpfs.base-{{ gpfs_base}}
-       - gpfs.docs-{{ gpfs_base}}
-       - gpfs.gpl-{{ gpfs_base}}
-       - gpfs.msg.en_US-{{ gpfs_base}}
+       - gpfs.base-{{ gpfs_latest}}
+       - gpfs.docs-{{ gpfs_latest}}
+       - gpfs.gpl-{{ gpfs_latest}}
+       - gpfs.msg.en_US-{{ gpfs_latest}}
 
      - name: gpfs | Upgrade rpms
        yum:
@@ -46,5 +34,11 @@
        - LINUX_DISTRIBUTION=REDHAT_AS_LINUX Autoconfig
        - World
        - InstallImages
+#       - rpm
        ignore_errors: true
+
+#     - name: gpfs | install kernel module
+#       yum:
+#         name: "{{ gpfs_kernel_rpm }}"
+#         state: present
 

@@ -4,7 +4,11 @@
 #http://spacewalk.lifesci.dundee.ac.uk/pub/gpfs/x86_64/3.5.0/base/
 #http://spacewalk.lifesci.dundee.ac.uk/pub/gpfs/x86_64/3.5.0/updates/
 
-gpfs_repo_url_base: "http://spacewalk.lifesci.dundee.ac.uk/pub/gpfs/x86_64/3.5.0/base/"
-gpfs_repo_url_updates: "http://spacewalk.lifesci.dundee.ac.uk/pub/gpfs/x86_64/3.5.0/updates/"
-gpfs_version: "3.5.0-3"
-gpfs_kernel_rpm: "/root/rpmbuild/RPMS/x86_64/gpfs.gplbin-2.6.32-358.el6.x86_64-3.4.0-15.x86_64.rpm" 
+play: "install"
+
+repo_version: "3.4.0"
+gpfs_repo_url_base: "http://spacewalk.lifesci.dundee.ac.uk/pub/gpfs/x86_64/{{repo_version}}/base/"
+gpfs_repo_url_updates: "http://spacewalk.lifesci.dundee.ac.uk/pub/gpfs/x86_64/{{repo_version}}/updates/"
+
+gpfs_base: "3.4.0-0"
+gpfs_latest: "3.5.0-3"
