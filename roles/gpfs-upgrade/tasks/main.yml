@@ -1,0 +1,11 @@
+---
+# tasks file for roles/gpfs34-upgrade
+
+    - include: setup_gpfs.yml
+      static: no
+      when: play == 'install'
+
+    - include: upgrade_gpfs.yml
+      static: no
+      when: play == 'upgrade'
+      become: true

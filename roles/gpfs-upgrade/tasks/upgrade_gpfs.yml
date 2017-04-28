@@ -1,0 +1,68 @@
+---
+# tasks file for roles/gpfs34-upgrade
+     - name: gpfs | stop SGE
+       command: /etc/init.d/sgeexecd.lifesci stop
+
+     - name: gpfs | cleanly unmount gpfs
+       command: /usr/lpp/mmfs/bin/mmshutdown  
+       with_items: 
+       - "{{ ansible_mounts }}"
+       when: item.mount == '/cluster'
+     
+     - name: gpfs | setup repository
+       template:
+         dest: /etc/yum.repos.d/gpfs.repo
+         src: gpfs-repo.j2
+
+     - name: gpfs | install base core rpms
+       yum:
+         name: "{{ item }}"
+         state: present
+         disable_gpg_check: yes
+       with_items:
+       - gpfs.base-{{ gpfs_latest }}
+       - gpfs.docs-{{ gpfs_latest }}
+       - gpfs.gpl-{{ gpfs_latest }}
+       - gpfs.msg.en_US-{{ gpfs_latest }}
+
+     - name: gpfs | install latest updates
+       yum:
+         name: "{{ item }}"
+         state: latest
+         disable_gpg_check: yes
+       with_items:
+       - gpfs.base
+       - gpfs.docs
+       - gpfs.gpl
+       - gpfs.msg.en_US
+
+     - name: gpfs | build kernel
+       make: 
+         chdir: /usr/lpp/mmfs/src/
+         params: LINUX_DISTRIBUTION=REDHAT_AS_LINUX 
+         target: Autoconfig
+
+     - name: gpfs | build kernel
+       make:
+         chdir: /usr/lpp/mmfs/src/
+         target: World
+
+     - name: gpfs | build kernel
+       make:
+         chdir: /usr/lpp/mmfs/src/
+         target: InstallImages
+
+#     - name: gpfs | build kernel
+#       command: chdir=/usr/lpp/mmfs/src/ make "{{ item }}"
+#       with_items:
+#       - LINUX_DISTRIBUTION=REDHAT_AS_LINUX Autoconfig
+#       - World
+#       - InstallImages
+#       ignore_errors: true
+
+     - name: gpfs | start gpfs
+       command: /usr/lpp/mmfs/bin/mmstartup
+
+     - name: gpfs | start sge
+       command: /etc/init.d/sgeexecd.lifesci start
+
