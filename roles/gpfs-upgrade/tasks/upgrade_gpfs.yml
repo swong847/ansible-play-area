@@ -1,5 +1,20 @@
 ---
 # tasks file for roles/gpfs34-upgrade
+     - name: gpfs | register if file exists
+       stat: 
+         path: "/usr/lpp/mmfs/.ansible-upgrade-{{gpfs_update}}"
+       register: file_exists
+
+     - name: gpfs | check if gpfs has been upgraded 
+       fail: msg="You are running the latest version of GPFS"
+       when: file_exists.stat.exists == True
+
+     #- name: pause
+     #  pause: 
+     #    prompt: pause
+
+# Stop Services
+
      - name: gpfs | stop SGE
        command: /etc/init.d/sgeexecd.lifesci stop
 
@@ -8,6 +23,36 @@
        with_items: 
        - "{{ ansible_mounts }}"
        when: item.mount == '/cluster'
+
+     - name: gpfs | stop gpfs
+       command: /etc/init.d/gpfs stop
+       ignore_errors: true
+
+     - name: gpfs | remove gpfs
+       yum:
+         name: "{item}"
+         state: removed
+       with_items:
+       - gpfs.gplbin
+       - gpfs.base
+       - gpfs.docs
+       - gpfs.gpl
+       - gpfs.msg.en_US  
+       
+ 
+# Restart server
+     - name: gpfs | reboot server
+       command: shutdown -r now
+
+     - name: gpfs | wait for server to come back online
+       local_action:
+         module: wait_for 
+           host={{ inventory_hostname }}
+           port=22
+           delay=180
+           timeout=420
+
+# Install GPFS
      
      - name: gpfs | setup repository
        template:
@@ -25,16 +70,7 @@
        - gpfs.gpl-{{ gpfs_latest }}
        - gpfs.msg.en_US-{{ gpfs_latest }}
 
-     - name: gpfs | install latest updates
-       yum:
-         name: "{{ item }}"
-         state: latest
-         disable_gpg_check: yes
-       with_items:
-       - gpfs.base
-       - gpfs.docs
-       - gpfs.gpl
-       - gpfs.msg.en_US
+#Build gpfs kernel
 
      - name: gpfs | build kernel
        make: 
@@ -52,13 +88,36 @@
          chdir: /usr/lpp/mmfs/src/
          target: InstallImages
 
-#     - name: gpfs | build kernel
-#       command: chdir=/usr/lpp/mmfs/src/ make "{{ item }}"
-#       with_items:
-#       - LINUX_DISTRIBUTION=REDHAT_AS_LINUX Autoconfig
-#       - World
-#       - InstallImages
-#       ignore_errors: true
+
+     - name: gpfs | install latest updates
+       yum:
+         name: "{{ item }}"
+         state: latest
+         disable_gpg_check: yes
+       with_items:
+       - gpfs.base
+       - gpfs.docs
+       - gpfs.gpl
+       - gpfs.msg.en_US
+
+#--
+     - name: gpfs | build kernel
+       make:
+         chdir: /usr/lpp/mmfs/src/
+         params: LINUX_DISTRIBUTION=REDHAT_AS_LINUX
+         target: Autoconfig
+
+     - name: gpfs | build kernel
+       make:
+         chdir: /usr/lpp/mmfs/src/
+         target: World
+
+     - name: gpfs | build kernel
+       make:
+         chdir: /usr/lpp/mmfs/src/
+         target: InstallImages
+
+# Start services
 
      - name: gpfs | start gpfs
        command: /usr/lpp/mmfs/bin/mmstartup
@@ -66,3 +125,8 @@
      - name: gpfs | start sge
        command: /etc/init.d/sgeexecd.lifesci start
 
+     - name: gpfs | register gpfs upgrade 
+       file:
+         path: /usr/lpp/mmfs/.ansible-upgrade-{{gpfs_update}}
+         state: touch
+       when: file_exists.stat.exists == False

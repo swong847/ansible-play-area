@@ -1,0 +1,7 @@
+---
+- hosts: c6100
+#- hosts: "{{ target }}"
+  roles: 
+    - gpfs-upgrade
+
+  gather_facts: true
