@@ -1,0 +1,17 @@
+---
+     - name: gpfs | build kernel
+       make:
+         chdir: /usr/lpp/mmfs/src/
+         params: LINUX_DISTRIBUTION=REDHAT_AS_LINUX
+         target: Autoconfig
+
+     - name: gpfs | build kernel
+       make:
+         chdir: /usr/lpp/mmfs/src/
+         target: World
+
+     - name: gpfs | build kernel
+       make:
+         chdir: /usr/lpp/mmfs/src/
+         target: InstallImages
+

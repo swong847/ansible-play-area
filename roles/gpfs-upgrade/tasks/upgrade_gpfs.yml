@@ -72,21 +72,8 @@
 
 #Build gpfs kernel
 
-     - name: gpfs | build kernel
-       make: 
-         chdir: /usr/lpp/mmfs/src/
-         params: LINUX_DISTRIBUTION=REDHAT_AS_LINUX 
-         target: Autoconfig
-
-     - name: gpfs | build kernel
-       make:
-         chdir: /usr/lpp/mmfs/src/
-         target: World
-
-     - name: gpfs | build kernel
-       make:
-         chdir: /usr/lpp/mmfs/src/
-         target: InstallImages
+     - include: make_kernel.yml
+       static: no
 
 
      - name: gpfs | install latest updates
@@ -100,22 +87,8 @@
        - gpfs.gpl
        - gpfs.msg.en_US
 
-#--
-     - name: gpfs | build kernel
-       make:
-         chdir: /usr/lpp/mmfs/src/
-         params: LINUX_DISTRIBUTION=REDHAT_AS_LINUX
-         target: Autoconfig
-
-     - name: gpfs | build kernel
-       make:
-         chdir: /usr/lpp/mmfs/src/
-         target: World
-
-     - name: gpfs | build kernel
-       make:
-         chdir: /usr/lpp/mmfs/src/
-         target: InstallImages
+     - include: make_kernel.yml
+       static: no
 
 # Start services
 
