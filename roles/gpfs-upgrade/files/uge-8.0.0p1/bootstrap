@@ -1,0 +1,15 @@
+# Version: 6.2
+#
+admin_user             gridadmin
+default_domain          none
+ignore_fqdn             true
+spooling_method         berkeleydb
+spooling_lib            libspoolb
+spooling_params         /gridware/sge/default/spooldb
+binary_path             /gridware/sge/bin
+qmaster_spool_dir       /gridware/sge/default/spool/qmaster
+security_mode           none
+listener_threads        2
+worker_threads          2
+scheduler_threads       1
+jvm_threads             0

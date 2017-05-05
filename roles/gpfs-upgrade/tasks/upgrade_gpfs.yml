@@ -54,10 +54,8 @@
 
 # Install GPFS
      
-     - name: gpfs | setup repository
-       template:
-         dest: /etc/yum.repos.d/gpfs.repo
-         src: gpfs-repo.j2
+     - include: setup_repo.yml
+       static: no
 
      - name: gpfs | install base core rpms
        yum:
@@ -75,17 +73,10 @@
      - include: make_kernel.yml
        static: no
 
+     - include: upgrade_gpfs_latest.yml
+       static: no
 
-     - name: gpfs | install latest updates
-       yum:
-         name: "{{ item }}"
-         state: latest
-         disable_gpg_check: yes
-       with_items:
-       - gpfs.base
-       - gpfs.docs
-       - gpfs.gpl
-       - gpfs.msg.en_US
+#Build gpfs kernel
 
      - include: make_kernel.yml
        static: no

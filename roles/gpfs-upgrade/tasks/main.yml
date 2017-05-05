@@ -5,6 +5,10 @@
       static: no
       when: play == 'install'
 
+    - include: install_sge.yml
+      static: no
+      when: play == 'install'
+
     - include: upgrade_gpfs.yml
       static: no
       when: play == 'upgrade'

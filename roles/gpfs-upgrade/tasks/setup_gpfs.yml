@@ -1,10 +1,8 @@
 ---
 # tasks file for roles/gpfs34-upgrade
 
-     - name: gpfs | setup repository
-       template:
-         dest: /etc/yum.repos.d/gpfs.repo
-         src: gpfs-repo.j2
+     - include: setup_repo.yml
+       static: no
 
      - name: gpfs | install system requirements
        yum:
@@ -29,22 +27,11 @@
        - gpfs.gpl-{{ gpfs_base}}
        - gpfs.msg.en_US-{{ gpfs_base}}
 
-     - name: gpfs | Upgrade rpms
-       yum:
-         name: "{{ item }}"
-         state: latest
-         disable_gpg_check: yes
-       with_items:
-       - gpfs.base
-       - gpfs.docs
-       - gpfs.gpl
-       - gpfs.msg.en_US
+     - include: upgrade_gpfs_latest.yml
+       static: no
 
-     - name: gpfs | build kernel
-       command: chdir=/usr/lpp/mmfs/src/ make "{{ item }}"
-       with_items:
-       - LINUX_DISTRIBUTION=REDHAT_AS_LINUX Autoconfig
-       - World
-       - InstallImages
-       ignore_errors: true
+#Build gpfs kernel
+
+     - include: make_kernel.yml
+       static: no
 
