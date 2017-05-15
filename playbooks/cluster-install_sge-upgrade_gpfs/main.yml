@@ -2,6 +2,6 @@
 - hosts: c6100
 #- hosts: "{{ target }}"
   roles: 
-    - gpfs-upgrade
+    - cluster-install_sge-upgrade_gpfs
 
   gather_facts: true
