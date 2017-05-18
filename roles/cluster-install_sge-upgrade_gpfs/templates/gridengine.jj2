@@ -151,8 +151,7 @@ SUBMIT_HOST_LIST=""
 # by hand, after the installation. The autoinstallation works without
 # any entry
 # (mandatory for execution host installation)
-#EXEC_HOST_LIST="{{ ansible_hostname }}"
-EXEC_HOST_LIST="c6100-1-4 c6100-1-2 c6100-1-3 c6100-1-4"
+EXEC_HOST_LIST="{{ansible_hostname}}"
 
 # The dir, where the execd spools (local configuration)
 # If you want configure your execution daemons to spool in

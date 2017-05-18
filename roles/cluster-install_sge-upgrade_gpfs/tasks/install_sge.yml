@@ -1,4 +1,7 @@
 ---
+  - include: fail_playbook.yml
+    static: no
+
   - name: register sgeexed file
     stat: 
       path: "/etc/init.d/sgeexecd.lifesci"
@@ -37,7 +40,7 @@
   - name: Copy specific user defaults 
     copy: src=uge-8.0.0p1/sge_request dest={{ sge_root }}/{{ sge_cell }}/sge_request owner=gridadmin group=gridadmin
 
-  - name: Copy NPSC-specific config
+  - name: Copy specific config
     template: src=gridengine.jj2 dest={{ sge_root }}/gridengine.conf owner=gridadmin group=gridadmin
 
   - name: Run UGE setup

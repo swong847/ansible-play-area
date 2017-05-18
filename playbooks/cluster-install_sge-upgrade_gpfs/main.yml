@@ -1,6 +1,6 @@
 ---
-- hosts: c6100
-#- hosts: "{{ target }}"
+#- hosts: 
+- hosts: "{{ target }}"
   roles: 
     - cluster-install_sge-upgrade_gpfs
 

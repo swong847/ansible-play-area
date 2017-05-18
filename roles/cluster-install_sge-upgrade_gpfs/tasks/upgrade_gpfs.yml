@@ -1,13 +1,8 @@
 ---
 # tasks file for roles/gpfs34-upgrade
-     - name: gpfs | register if file exists
-       stat: 
-         path: "/usr/lpp/mmfs/.ansible-upgrade-{{gpfs_update}}"
-       register: file_exists
 
-     - name: gpfs | check if gpfs has been upgraded 
-       fail: msg="You are running the latest version of GPFS"
-       when: file_exists.stat.exists == True
+     - include: fail_playbook.yml
+       static: no
 
      #- name: pause
      #  pause: 
