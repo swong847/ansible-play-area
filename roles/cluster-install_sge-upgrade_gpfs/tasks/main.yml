@@ -1,7 +1,7 @@
 ---
 # tasks file for roles/gpfs34-upgrade
 
-    - include: setup_gpfs.yml
+    - include: install_gpfs_base.yml
       static: no
       when: play == 'install'
 

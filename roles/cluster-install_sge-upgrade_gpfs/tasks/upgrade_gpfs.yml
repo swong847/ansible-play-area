@@ -1,5 +1,9 @@
 ---
-# tasks file for roles/gpfs34-upgrade
+# This playbook is a post requisite once SGE has been configured on a node.  
+# If SGE does not exist, please do not proceed to run this upgrade.
+# The steps in this playbook will stop services, unmount the filesystem, ugprade spectrum scale and restart services
+
+# This playbook may look odd to begin with, it basically uninstalls GPFS, installs the base software and then updates it to the latest.  The reasoning for this was down to an issue with the portability layer when upgrading.  The fix was to uninstall gpfs cleanly, reboot and reinstall.
 
      - include: fail_playbook.yml
        static: no
@@ -68,7 +72,7 @@
      - include: make_kernel.yml
        static: no
 
-     - include: upgrade_gpfs_latest.yml
+     - include: gpfs_packages.yml
        static: no
 
 #Build gpfs kernel
