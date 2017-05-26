@@ -1,0 +1,6 @@
+---
+#- hosts: 
+- hosts: "{{ target }}"
+  roles: 
+    - cp-jpred-dbs
+
