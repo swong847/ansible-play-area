@@ -22,6 +22,7 @@
        with_items: 
        - "{{ ansible_mounts }}"
        when: item.mount == '/cluster'
+       ignore_errors: true
 
      - name: gpfs | stop gpfs
        command: /etc/init.d/gpfs stop
@@ -42,6 +43,8 @@
 # Restart server
      - name: gpfs | reboot server
        command: shutdown -r now
+       tags:
+         - reboot
 
      - name: gpfs | wait for server to come back online
        local_action:
@@ -49,7 +52,9 @@
            host={{ inventory_hostname }}
            port=22
            delay=180
-           timeout=420
+           timeout=600
+       tags:
+         - reboot
 
 # Install GPFS
      
