@@ -19,13 +19,14 @@ ansible-playbook playbooks/gpfs34-upgrade/main.yml -e "ansible_user=root play=up
 
 
 
+
 Example Playbook
 ----------------
 
 ---
       - hosts: "{{ target }}"
       roles:
-         - gpfs34-upgrade
+         - cluster-install_sge-upgrade_gpfs
 
 Author Information
 ------------------

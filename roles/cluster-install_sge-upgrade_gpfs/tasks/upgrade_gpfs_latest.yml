@@ -1,0 +1,12 @@
+---
+
+     - name: gpfs | Upgrade rpms
+       yum:
+         name: "{{ item }}"
+         state: latest
+         disable_gpg_check: yes
+       with_items:
+       - gpfs.base
+       - gpfs.docs
+       - gpfs.gpl
+       - gpfs.msg.en_US

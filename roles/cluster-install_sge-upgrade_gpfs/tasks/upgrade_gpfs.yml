@@ -1,9 +1,5 @@
 ---
-# This playbook is a post requisite once SGE has been configured on a node.  
-# If SGE does not exist, please do not proceed to run this upgrade.
-# The steps in this playbook will stop services, unmount the filesystem, ugprade spectrum scale and restart services
-
-# This playbook may look odd to begin with, it basically uninstalls GPFS, installs the base software and then updates it to the latest.  The reasoning for this was down to an issue with the portability layer when upgrading.  The fix was to uninstall gpfs cleanly, reboot and reinstall.
+# tasks file for roles/gpfs34-upgrade
 
      - include: fail_playbook.yml
        static: no
@@ -14,48 +10,34 @@
 
 # Stop Services
 
-     - name: gpfs | register if sge exists
-       stat:
-         path: "/etc/init.d/sgeexecd.lifesci"
-       register: sge_exists
-
      - name: gpfs | stop SGE
        command: /etc/init.d/sgeexecd.lifesci stop
-       when: sge_exists.stat.exists == True
 
      - name: gpfs | cleanly unmount gpfs
        command: /usr/lpp/mmfs/bin/mmshutdown  
        with_items: 
        - "{{ ansible_mounts }}"
        when: item.mount == '/cluster'
-       ignore_errors: true
-       tags:
-         - removeGPFS
 
      - name: gpfs | stop gpfs
        command: /etc/init.d/gpfs stop
        ignore_errors: true
-       tags:
-         - removeGPFS
 
      - name: gpfs | remove gpfs
        yum:
-         name: "{{item}}"
-         state: absent
+         name: "{item}"
+         state: removed
        with_items:
-       - gpfs.base
        - gpfs.gplbin
+       - gpfs.base
        - gpfs.docs
        - gpfs.gpl
        - gpfs.msg.en_US  
-       tags:
-         - removeGPFS
+       
  
 # Restart server
      - name: gpfs | reboot server
        command: shutdown -r now
-       tags:
-         - reboot
 
      - name: gpfs | wait for server to come back online
        local_action:
@@ -63,19 +45,12 @@
            host={{ inventory_hostname }}
            port=22
            delay=180
-           timeout=600
-       tags:
-         - reboot
+           timeout=420
 
 # Install GPFS
      
      - include: setup_repo.yml
        static: no
-       tags:
-         - baseGPFS
-
-     - name: gpfs | clean repo
-       command: yum clean all
 
      - name: gpfs | install base core rpms
        yum:
@@ -87,29 +62,13 @@
        - gpfs.docs-{{ gpfs_latest }}
        - gpfs.gpl-{{ gpfs_latest }}
        - gpfs.msg.en_US-{{ gpfs_latest }}
-       tags:
-         - baseGPFS
-
-     - name: gpfs | install gpfs gskit
-       yum:
-         name: "{{ item }}"
-         state: present
-         disable_gpg_check: yes
-       with_items:
-       - gpfs.gskit-{{ gskit_ver }}
-       tags:
-         - baseGPFS
-       ignore_errors: true
-
 
 #Build gpfs kernel
 
      - include: make_kernel.yml
        static: no
-       tags:
-         - baseGPFS
 
-     - include: spectrumscale_packages.yml
+     - include: upgrade_gpfs_latest.yml
        static: no
 
 #Build gpfs kernel
