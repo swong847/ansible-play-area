@@ -1,0 +1,17 @@
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/svn/ansible/!svn/ver/8/roles/sp_sysv-setup-old/tasks
+END
+main.yml
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/ansible/!svn/ver/8/roles/sp_sysv-setup-old/tasks/main.yml
+END
+setup-sp-system-v.yml
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/ansible/!svn/ver/8/roles/sp_sysv-setup-old/tasks/setup-sp-system-v.yml
+END

@@ -1,0 +1,20 @@
+---
+# defaults file for roles/gpfs34-upgrade
+#http://spacewalk.lifesci.dundee.ac.uk/pub/gpfs/x86_64/3.4.0/Base/
+#http://spacewalk.lifesci.dundee.ac.uk/pub/gpfs/x86_64/3.5.0/base/
+#http://spacewalk.lifesci.dundee.ac.uk/pub/gpfs/x86_64/3.5.0/updates/
+
+play: "install"
+
+repo_version: "3.4.0"
+gpfs_repo_url_base: "http://spacewalk.lifesci.dundee.ac.uk/pub/gpfs/x86_64/{{repo_version}}/base/"
+gpfs_repo_url_updates: "http://spacewalk.lifesci.dundee.ac.uk/pub/gpfs/x86_64/{{repo_version}}/updates/"
+
+gpfs_base: "3.4.0-0"
+gpfs_latest: "3.5.0-3"
+gpfs_update: "3.5.0-33"
+gskit_ver: "8.0.50-16"
+
+sge_root: /gridware/sge
+sge_cell: default
+uge_version: 8.0.0p1

@@ -1,0 +1,71 @@
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/ansible/!svn/ver/37/roles/cluster-install_sge-upgrade_gpfs/files/uge-8.0.0p1
+END
+sge_aliases
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/ansible/!svn/ver/37/roles/cluster-install_sge-upgrade_gpfs/files/uge-8.0.0p1/sge_aliases
+END
+cluster_name
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/ansible/!svn/ver/37/roles/cluster-install_sge-upgrade_gpfs/files/uge-8.0.0p1/cluster_name
+END
+act_qmaster
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/ansible/!svn/ver/37/roles/cluster-install_sge-upgrade_gpfs/files/uge-8.0.0p1/act_qmaster
+END
+qtask
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/ansible/!svn/ver/37/roles/cluster-install_sge-upgrade_gpfs/files/uge-8.0.0p1/qtask
+END
+sge_request
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/ansible/!svn/ver/37/roles/cluster-install_sge-upgrade_gpfs/files/uge-8.0.0p1/sge_request
+END
+sgeexecd
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/ansible/!svn/ver/37/roles/cluster-install_sge-upgrade_gpfs/files/uge-8.0.0p1/sgeexecd
+END
+settings.sh
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/ansible/!svn/ver/37/roles/cluster-install_sge-upgrade_gpfs/files/uge-8.0.0p1/settings.sh
+END
+sge_qstat
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/ansible/!svn/ver/37/roles/cluster-install_sge-upgrade_gpfs/files/uge-8.0.0p1/sge_qstat
+END
+sgemaster
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/ansible/!svn/ver/37/roles/cluster-install_sge-upgrade_gpfs/files/uge-8.0.0p1/sgemaster
+END
+settings.csh
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/ansible/!svn/ver/37/roles/cluster-install_sge-upgrade_gpfs/files/uge-8.0.0p1/settings.csh
+END
+bootstrap
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/ansible/!svn/ver/37/roles/cluster-install_sge-upgrade_gpfs/files/uge-8.0.0p1/bootstrap
+END

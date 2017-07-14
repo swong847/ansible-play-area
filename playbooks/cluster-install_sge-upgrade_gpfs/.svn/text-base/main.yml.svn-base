@@ -1,0 +1,7 @@
+---
+#- hosts: 
+- hosts: "{{ target }}"
+  roles: 
+    - cluster-install_sge-upgrade_gpfs
+
+  gather_facts: true

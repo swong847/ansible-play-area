@@ -1,0 +1,9 @@
+---
+   - name: start dsmcad
+     service: name=dsmcad state=restarted
+
+   #- name: reload dsmcad
+   #  command: systemctl daemon-reload
+
+   - name: reload dsmcad
+     command: systemctl daemon-reload

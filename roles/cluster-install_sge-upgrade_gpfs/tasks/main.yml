@@ -8,7 +8,8 @@
 
     - include: install_sge.yml
       static: no
-      when: play == 'install'
+      when: play == 'install' or
+            play == 'sge'
 
     - include: upgrade_spectrumscale.yml
       static: no

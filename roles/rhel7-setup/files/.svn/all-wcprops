@@ -1,0 +1,65 @@
+K 25
+svn:wc:ra_dav:version-url
+V 48
+/svn/ansible/!svn/ver/34/roles/rhel7-setup/files
+END
+rescan.sh
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/ansible/!svn/ver/34/roles/rhel7-setup/files/rescan.sh
+END
+syslog.conf
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/ansible/!svn/ver/34/roles/rhel7-setup/files/syslog.conf
+END
+crond
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/svn/ansible/!svn/ver/34/roles/rhel7-setup/files/crond
+END
+cron_access.conf
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/ansible/!svn/ver/34/roles/rhel7-setup/files/cron_access.conf
+END
+nsswitch.conf
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/ansible/!svn/ver/34/roles/rhel7-setup/files/nsswitch.conf
+END
+sshd_config
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/ansible/!svn/ver/34/roles/rhel7-setup/files/sshd_config
+END
+selinux
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/svn/ansible/!svn/ver/34/roles/rhel7-setup/files/selinux
+END
+epel.repo
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/ansible/!svn/ver/34/roles/rhel7-setup/files/epel.repo
+END
+inittab
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/svn/ansible/!svn/ver/34/roles/rhel7-setup/files/inittab
+END
+rhnsd
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/svn/ansible/!svn/ver/34/roles/rhel7-setup/files/rhnsd
+END

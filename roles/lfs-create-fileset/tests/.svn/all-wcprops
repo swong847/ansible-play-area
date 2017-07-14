@@ -1,0 +1,17 @@
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/svn/ansible/!svn/ver/25/roles/lfs-create-fileset/tests
+END
+test.yml
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/ansible/!svn/ver/25/roles/lfs-create-fileset/tests/test.yml
+END
+inventory
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/ansible/!svn/ver/25/roles/lfs-create-fileset/tests/inventory
+END

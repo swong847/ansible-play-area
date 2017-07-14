@@ -1,0 +1,11 @@
+---
+# tasks file for roles/cent6-compute-software
+
+- name: Install miscellaneous RPMs
+  yum: name={{ item }} state=latest
+  with_items: "{{ misc_rpms }}"
+  tags: yum
+- name: Install Perl RPMs
+  yum: name={{ item }} state=latest
+  with_items: "{{ perl_rpms }}"
+  tags: yum,perl

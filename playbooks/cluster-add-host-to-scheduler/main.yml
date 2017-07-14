@@ -1,0 +1,7 @@
+---
+#- hosts: 
+- hosts: "{{ target }}"
+  roles: 
+    - cluster-add-host-to-scheduler
+
+  gather_facts: true

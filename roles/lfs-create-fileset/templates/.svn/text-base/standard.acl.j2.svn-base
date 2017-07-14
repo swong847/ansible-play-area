@@ -1,0 +1,11 @@
+#NFSv4 ACL
+#owner:{{ fileset_username }}
+#group:{{ fileset_group_name }}
+special:everyone@:---c:deny
+ (-)READ/LIST (-)WRITE/CREATE (-)APPEND/MKDIR (-)SYNCHRONIZE (-)READ_ACL  (-)READ_ATTR  (-)READ_NAMED
+ (-)DELETE    (-)DELETE_CHILD (-)CHOWN        (-)EXEC/SEARCH (X)WRITE_ACL (-)WRITE_ATTR (-)WRITE_NAMED
+
+group:{{ fileset_group_name }}:rwxc:allow:FileInherit:DirInherit
+ (X)READ/LIST (X)WRITE/CREATE (X)APPEND/MKDIR (X)SYNCHRONIZE (X)READ_ACL  (X)READ_ATTR  (X)READ_NAMED
+ (X)DELETE    (X)DELETE_CHILD (X)CHOWN        (X)EXEC/SEARCH (X)WRITE_ACL (X)WRITE_ATTR (X)WRITE_NAMED
+

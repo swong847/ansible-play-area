@@ -1,0 +1,11 @@
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/svn/ansible/!svn/ver/20/roles/ldap-to-winbind/meta
+END
+main.yml
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/ansible/!svn/ver/20/roles/ldap-to-winbind/meta/main.yml
+END

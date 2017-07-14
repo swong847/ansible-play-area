@@ -1,0 +1,12 @@
+---
+- hosts: lifesci
+
+  tasks:
+  - name: Download trusted cert for spacewalk
+    raw: wget http://spacewalk.lifesci.dundee.ac.uk/pub/rhn-org-trusted-ssl-cert-1.0-2.noarch.rpm
+
+  - name: Install trusted cert
+    raw: rpm -Uvh rhn-org-trusted-ssl-cert-1.0-2.noarch.rpm
+
+  - name: Install bootstrap Python2 and JSon
+    raw: yum install -y python2 python-simplejson

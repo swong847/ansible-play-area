@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 37
+/svn/ansible/!svn/ver/8/inventory/old
+END
+sls-nixadmin.hosts
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/svn/ansible/!svn/ver/8/inventory/old/sls-nixadmin.hosts
+END
+sls-k.hosts
+K 25
+svn:wc:ra_dav:version-url
+V 49
+/svn/ansible/!svn/ver/8/inventory/old/sls-k.hosts
+END
+sls-n.hosts
+K 25
+svn:wc:ra_dav:version-url
+V 49
+/svn/ansible/!svn/ver/8/inventory/old/sls-n.hosts
+END
+hosts-old
+K 25
+svn:wc:ra_dav:version-url
+V 47
+/svn/ansible/!svn/ver/8/inventory/old/hosts-old
+END

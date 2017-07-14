@@ -1,0 +1,83 @@
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/ansible/!svn/ver/37/roles/cluster-install_sge-upgrade_gpfs/files/univa
+END
+Release_Notes.pdf
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/ansible/!svn/ver/37/roles/cluster-install_sge-upgrade_gpfs/files/univa/Release_Notes.pdf
+END
+ge-8.0.0p1-bin-lx-amd64.tar.gz
+K 25
+svn:wc:ra_dav:version-url
+V 106
+/svn/ansible/!svn/ver/37/roles/cluster-install_sge-upgrade_gpfs/files/univa/ge-8.0.0p1-bin-lx-amd64.tar.gz
+END
+ge-8.0.0p1-bin-sol-sparc64.tar.gz
+K 25
+svn:wc:ra_dav:version-url
+V 109
+/svn/ansible/!svn/ver/37/roles/cluster-install_sge-upgrade_gpfs/files/univa/ge-8.0.0p1-bin-sol-sparc64.tar.gz
+END
+User_Guide.pdf
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/ansible/!svn/ver/37/roles/cluster-install_sge-upgrade_gpfs/files/univa/User_Guide.pdf
+END
+ge-8.0.0p1-arco.tar.gz
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/ansible/!svn/ver/37/roles/cluster-install_sge-upgrade_gpfs/files/univa/ge-8.0.0p1-arco.tar.gz
+END
+ge-8.0.0p1-common.tar.gz
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/svn/ansible/!svn/ver/37/roles/cluster-install_sge-upgrade_gpfs/files/univa/ge-8.0.0p1-common.tar.gz
+END
+ge-8.0.0p1-bin-win32-x86.tar.gz
+K 25
+svn:wc:ra_dav:version-url
+V 107
+/svn/ansible/!svn/ver/37/roles/cluster-install_sge-upgrade_gpfs/files/univa/ge-8.0.0p1-bin-win32-x86.tar.gz
+END
+Install_Guide.pdf
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/ansible/!svn/ver/37/roles/cluster-install_sge-upgrade_gpfs/files/univa/Install_Guide.pdf
+END
+ge-8.0.0p1-bin-lx-x86.tar.gz
+K 25
+svn:wc:ra_dav:version-url
+V 104
+/svn/ansible/!svn/ver/37/roles/cluster-install_sge-upgrade_gpfs/files/univa/ge-8.0.0p1-bin-lx-x86.tar.gz
+END
+ge-8.0.0p1-bin-sol-amd64.tar.gz
+K 25
+svn:wc:ra_dav:version-url
+V 107
+/svn/ansible/!svn/ver/37/roles/cluster-install_sge-upgrade_gpfs/files/univa/ge-8.0.0p1-bin-sol-amd64.tar.gz
+END
+ge-8.0.0p1-bin-aix51.tar.gz
+K 25
+svn:wc:ra_dav:version-url
+V 103
+/svn/ansible/!svn/ver/37/roles/cluster-install_sge-upgrade_gpfs/files/univa/ge-8.0.0p1-bin-aix51.tar.gz
+END
+Admin_Guide.pdf
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/ansible/!svn/ver/37/roles/cluster-install_sge-upgrade_gpfs/files/univa/Admin_Guide.pdf
+END
+md5sums
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/ansible/!svn/ver/37/roles/cluster-install_sge-upgrade_gpfs/files/univa/md5sums
+END

@@ -1,0 +1,18 @@
+---
+- hosts: nemo
+
+  tasks:
+     - name: gpfs | check if gpfs is up to date
+       yum:
+         list="gpfs.base"
+       register: vers
+
+     - name: gpfs | check if gpfs is up to date
+       command: yum list gpfs.base
+       register: vers
+       tags:
+         - gpfs
+
+     - name: debug message
+       debug: 
+         msg: "{{vers}}"

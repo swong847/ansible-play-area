@@ -1,0 +1,16 @@
+# Author: Simon Wong <swong@dundee.ac.uk>
+# Playbook created 30032017 by UoD-IT-RC
+# Purpose: The purpose of this playbook is to remove the Spectrum Protect client and remove the SP 
+# Actions: Sets up repo, installs client, copies file settings and starts service
+# Outstanding: Create node on SP server, sets password, copies .sys and .opt file settings correctly and then starts incremental back up
+
+---
+- hosts: systems
+  roles:
+    - sp_uninstall
+  gather_facts: yes
+
+  vars_files:
+    - auth
+
+

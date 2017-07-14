@@ -1,0 +1,11 @@
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/ansible/!svn/ver/8/roles/sp_sysv-setup-old/templates
+END
+dsm.sys.j2
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/ansible/!svn/ver/8/roles/sp_sysv-setup-old/templates/dsm.sys.j2
+END

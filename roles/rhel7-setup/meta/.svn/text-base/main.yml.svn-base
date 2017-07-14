@@ -1,0 +1,19 @@
+galaxy_info:
+  author: Simon Wong
+  description: Ansible role to setup and configure a RHEL7 system out the box.
+  company: UoD-IT
+
+  license: license (GPLv2, CC-BY, etc)
+
+  min_ansible_version: 1.2
+
+  platorms:
+  - name: E
+    versions:
+      - 7
+
+  galaxy_tags: 
+    - system
+    - rhel7
+ 
+  dependencies: []

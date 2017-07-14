@@ -1,0 +1,17 @@
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/svn/ansible/!svn/ver/30/roles/spectrum-scale-set-acl
+END
+.travis.yml
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/ansible/!svn/ver/28/roles/spectrum-scale-set-acl/.travis.yml
+END
+README.md
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/ansible/!svn/ver/28/roles/spectrum-scale-set-acl/README.md
+END

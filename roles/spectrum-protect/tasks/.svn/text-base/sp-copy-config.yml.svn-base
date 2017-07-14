@@ -1,0 +1,31 @@
+
+---
+# This file is for DSM.SYS
+    - name: Check if sys file exists
+      stat: path=/opt/tivoli/tsm/client/ba/bin/dsm.sys
+      register: file_dsm_sys
+
+    - name: copy the dsm.sys.uodnew file if the system has a copy present
+      template: src=dsm.sys.j2 dest=/opt/tivoli/tsm/client/ba/bin/dsm.sys.uodnew force=yes
+      when: file_dsm_sys.stat.exists == True
+
+    - name: copy the dsm.sys file if it doesnt exist
+      template: src=dsm.sys.j2 dest=/opt/tivoli/tsm/client/ba/bin/dsm.sys force=no
+      when: file_dsm_sys.stat.exists == False
+
+# This file is for DSM.OPT
+    - name: Check if opt file exists
+      stat: path=/opt/tivoli/tsm/client/ba/bin/dsm.opt
+      register: file_dsm_opt
+
+    - name: copy the dsm.opt file if the system has a copy present
+      copy: src=dsm.opt dest=/opt/tivoli/tsm/client/ba/bin/dsm.opt.uodnew force=yes
+      when: file_dsm_opt.stat.exists == True
+      notify:
+         - start dsmcad
+
+    - name: copy the dsm.opt file if it doesnt exist
+      copy: src=dsm.opt dest=/opt/tivoli/tsm/client/ba/bin/dsm.opt force=no
+      when: file_dsm_opt.stat.exists == False
+      notify:
+         - start dsmcad

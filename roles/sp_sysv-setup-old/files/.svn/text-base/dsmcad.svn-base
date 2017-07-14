@@ -1,0 +1,98 @@
+#!/bin/bash
+#
+# Written by Chris Allan <callan@blackcat.ca> for RHEL3
+#
+# Fixed to to work properly Jonathan Buzzard <j.buzzard@dundee.ac.uk>
+#
+# chkconfig: 2345 90 90
+# description: Starts and stops the Tivoli Client Acceptor daemon
+#
+# pidfile: /var/run/dsmcad.pid
+# config:  /opt/tivoli/tsm/client/ba/bin/dsm.sys
+
+# Source function library.
+if [ -f /etc/init.d/functions ] ; then
+  . /etc/init.d/functions
+elif [ -f /etc/rc.d/init.d/functions ] ; then
+  . /etc/rc.d/init.d/functions
+else
+  exit 0
+fi
+
+# Avoid using root's TMPDIR
+unset TMPDIR
+
+# Source networking configuration.
+. /etc/sysconfig/network
+
+# Check that networking is up.
+[ ${NETWORKING} = "no" ] && exit 0
+
+# Check that dsm.conf exists.
+[ -f /opt/tivoli/tsm/client/ba/bin/dsm.sys ] || exit 0
+
+# Check that we can write to it... so non-root users stop here
+[ -w /opt/tivoli/tsm/client/ba/bin/dsm.sys ] || exit 0
+
+DAEMON=/opt/tivoli/tsm/client/ba/bin/dsmcad
+
+RETVAL=0
+
+start() {
+	export DSM_LOG=/var/log
+	export LD_LIBRARY_PATH=/opt/tivoli/tsm/client/api/bin
+	# Nasty hack to avoid hangs because of locale issues
+	export LANG=en_US
+
+        KIND="DSMCAD"
+	echo -n $"Starting $KIND services: "
+	daemon $DAEMON
+	RETVAL=$?
+	echo
+	[ $RETVAL -eq 0 ] && touch /var/lock/subsys/dsmcad || \
+	   RETVAL=1
+	return $RETVAL
+}	
+
+stop() {
+        KIND="DSMCAD"
+	echo -n $"Shutting down $KIND services: "
+	killproc dsmcad
+	RETVAL=$?
+	[ $RETVAL -eq 0 ] && rm -f /var/lock/subsys/dsmcad
+	echo ""
+	return $RETVAL
+}	
+
+restart() {
+	stop
+	start
+}	
+
+rhstatus() {
+	status dsmcad
+}	
+
+case "$1" in
+  start)
+  	start
+	;;
+  stop)
+  	stop
+	;;
+  restart)
+  	restart
+	;;
+  status)
+  	rhstatus
+	;;
+  condrestart)
+  	[ -f /var/lock/subsys/dsmcad ] && restart || :
+	;;
+  *)
+	echo $"Usage: $0 {start|stop|restart|status|condrestart}"
+	exit 1
+esac
+
+exit $?
+

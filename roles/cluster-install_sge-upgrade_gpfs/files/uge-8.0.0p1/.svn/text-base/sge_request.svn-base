@@ -1,0 +1,37 @@
+#
+#
+# This file contains cell wide default submit options which are
+# automatically applied to all job submission requests. Users can get rid of
+# these defaults by using the -clear option.
+#
+# See sge_request(5) for a detailed description of the file format.
+#
+# (c) 2008 Sun Microsystems, Inc. All rights reserved. Use is subject to license terms.  
+
+#
+# Sample #1 prevents job submissions of jobs which can
+# never be scheduled.
+# 
+# -w e
+#
+
+#
+# Sample #2 causes the jobs standard error stream to be merged 
+# into the standard outout stream. 
+#
+# -j y
+#
+
+#
+# Sample #3 assigns a low default submit priority. For higher 
+# prior jobs the priority can be increased at jobs submission 
+# time by uing "-p <higher_priority>". The value of 
+# <higher_priority> may not exeed 0 because priorities above
+# this value can only be set by managers. 
+#
+# Please notice that in GRD submission priorities have a 
+# different meaning.
+#
+# -p -100
+#
+-q 64bit-pri.q -l ram=1750M

@@ -1,0 +1,23 @@
+K 25
+svn:wc:ra_dav:version-url
+V 50
+/svn/ansible/!svn/ver/24/playbooks/ldap-to-winbind
+END
+auth
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/svn/ansible/!svn/ver/24/playbooks/ldap-to-winbind/auth
+END
+main.yml
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/ansible/!svn/ver/21/playbooks/ldap-to-winbind/main.yml
+END
+main.retry
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/ansible/!svn/ver/20/playbooks/ldap-to-winbind/main.retry
+END

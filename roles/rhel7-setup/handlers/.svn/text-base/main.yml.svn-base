@@ -1,0 +1,8 @@
+---
+# handlers file for roles/rhel7-setup
+    
+   - name: restart rhsmcertd
+     systemd: name=rhsmcertd state=restarted
+
+   - name: restart sssd
+     systemd: name=sssd state=restarted

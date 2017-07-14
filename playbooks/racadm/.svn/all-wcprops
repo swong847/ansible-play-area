@@ -1,0 +1,23 @@
+K 25
+svn:wc:ra_dav:version-url
+V 41
+/svn/ansible/!svn/ver/41/playbooks/racadm
+END
+sls-racadm-sslkey.yaml
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/ansible/!svn/ver/41/playbooks/racadm/sls-racadm-sslkey.yaml
+END
+sls-racadm-root.yaml
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/ansible/!svn/ver/40/playbooks/racadm/sls-racadm-root.yaml
+END
+sls-racadm-newuser.yaml
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/ansible/!svn/ver/40/playbooks/racadm/sls-racadm-newuser.yaml
+END

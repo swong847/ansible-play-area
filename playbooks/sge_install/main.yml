@@ -1,0 +1,7 @@
+---
+#- hosts: 
+- hosts: "{{ target }}"
+  roles: 
+    - sge_install
+
+  gather_facts: true

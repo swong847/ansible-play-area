@@ -1,0 +1,17 @@
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/ansible/!svn/ver/37/roles/cluster-install_sge-upgrade_gpfs/tests
+END
+test.yml
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/ansible/!svn/ver/37/roles/cluster-install_sge-upgrade_gpfs/tests/test.yml
+END
+inventory
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/ansible/!svn/ver/37/roles/cluster-install_sge-upgrade_gpfs/tests/inventory
+END

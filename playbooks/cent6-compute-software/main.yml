@@ -1,0 +1,5 @@
+---
+- hosts: "{{ target }}"
+  roles:
+    - cent6-compute-software
+

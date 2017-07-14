@@ -1,0 +1,35 @@
+# tasks file for roles/ldap-to-winbind
+---
+    - name: Does file exist
+      stat: path=rhn-org-trusted-ssl-cert-1.0-2.noarch.rpm
+      register: rpm_ssl
+
+    - name: Download trusted cert for spacewalk
+      raw: wget http://spacewalk.lifesci.dundee.ac.uk/pub/rhn-org-trusted-ssl-cert-1.0-2.noarch.rpm
+      when: rpm_ssl.stat.exists == False
+ 
+    - name: Install trusted cert
+      raw: rpm -Uvh rhn-org-trusted-ssl-cert-1.0-2.noarch.rpm
+      ignore_errors: yes
+      notify: Stop nscd
+
+    - name: Install Samba
+      yum: name=samba3x-winbind state=present   
+
+    - name: Add additional text to samba file or copy file
+      template: src=smb.conf.j2 dest=/etc/samba/smb.conf force=yes
+
+    - name: Pass the config variables to authconfig-tui
+      command: authconfig --disableldap --enablewinbind --enableshadow --enablelocauthorize --disableldapauth --enablemd5 --enablewinbindauth --smbsecurity=ads --smbrealm=AD.LIFESCI.DUNDEE.AC.UK  --enablewinbindusedefaultdomain --smbworkgroup=lifesci.dundee.ac.uk --smbservers=ad.lifesci.dundee.ac.uk --smbworkgroup=lifesci-ad --update 
+
+    - name: Join / bind
+      command: net ads join -U {{ adjoin }}
+      ignore_errors: yes
+      notify: Restart winbind
+
+#    - name: Change ssh permit login
+#      lineinfile: dest=/etc/ssh/sshd_config
+#                  regexp="^PermitRootLogin"
+#                  line="PermitRootLogin no"
+#                  state=present
+#      notify: Restart ssh

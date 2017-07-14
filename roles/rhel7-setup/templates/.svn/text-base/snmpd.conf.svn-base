@@ -1,0 +1,13 @@
+rocommunity {{snmpd_community}}
+com2sec notConfigUser default {{snmpd_community}}
+group notConfigGroup v1 notConfigUser
+group notConfigGroup v2c notConfigUser
+view systemview included system
+access notConfigGroup "" any noauth exact systemview none none
+
+syslocation CIR-G
+syscontact support@lifesci.dundee.ac.uk
+load 12 14 14
+disk /
+
+proc sshd 100 1

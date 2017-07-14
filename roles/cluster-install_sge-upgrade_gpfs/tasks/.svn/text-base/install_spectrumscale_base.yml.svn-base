@@ -1,0 +1,40 @@
+---
+# tasks file for roles/gpfs34-upgrade
+     - include: fail_playbook.yml
+       static: no
+
+     - include: setup_repo.yml
+       static: no
+
+     - name: gpfs | install system requirements
+       yum:
+         name: "{{ item }}"
+         state: present
+       with_items:
+       - cpp
+       - kernel-devel
+       - kernel-headers
+       - rpm-build
+       - gcc-c++
+       - openssl-devel
+       ignore_errors: True
+
+     - name: gpfs | install rpms
+       yum:
+         name: "{{ item }}"
+         state: present
+         disable_gpg_check: yes
+       with_items:
+       - gpfs.base-{{ gpfs_base}}
+       - gpfs.docs-{{ gpfs_base}}
+       - gpfs.gpl-{{ gpfs_base}}
+       - gpfs.msg.en_US-{{ gpfs_base}}
+       ignore_errors: True
+#     - include: upgrade_gpfs_latest.yml
+#       static: no
+
+#Build gpfs kernel
+
+     - include: make_kernel.yml
+       static: no
+

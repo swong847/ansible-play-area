@@ -1,0 +1,16 @@
+---
+# tasks file for roles/gpfs34-upgrade
+# Steps still to define // mmdelnode from cluster // delete old ssh key in nsds // create new ssh key // mmaddnode to cluster // start spectrumscale //
+
+    - include: install_spectrumscale_base.yml
+      static: no
+      when: play == 'install'
+
+    - include: install_sge.yml
+      static: no
+      when: play == 'install'
+
+    - include: upgrade_spectrumscale.yml
+      static: no
+      when: play == 'upgrade'
+     # become: true

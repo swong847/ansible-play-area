@@ -1,0 +1,25 @@
+# Author: Simon Wong <swong@dundee.ac.uk>
+# Playbook created 20032017 by UoD-IT-RC
+# Purpose: The purpose of this playbook is to create Nodes in Spectrum Scale
+# Actions: Log into SP, Create/Register Node, assign an Optionset and define an Association 
+# Outstanding: Create node on SP server, sets password, copies .sys and .opt file settings correctly and then starts incremental back up
+
+---
+   
+    - name: Log into Spectrum Protect
+      shell: /usr/bin/dsmadmc -servername=sp0 -errorlogname=$HOME/dsmerror.log {{authid}} register node {{ansible_nodename}} {{sp_register_password}} domain={{sp_domain}} cloptset={{sp_cloptset}}  replstate=enabled
+      delegate_to: localhost
+      ignore_errors: yes
+      tags: register
+
+    - name: Define Association
+      shell: /usr/bin/dsmadmc -servername=sp0 -errorlogname=$HOME/dsmerror.log {{authid}} define association {{sp_domain}} {{sp_schedule}} {{ansible_nodename}}
+      delegate_to: localhost
+      ignore_errors: yes
+      tags: register
+
+    - name: Update node replication and existing node passwords
+      shell: /usr/bin/dsmadmc -servername=sp0 -errorlogname=$HOME/dsmerror.log {{authid}} update node {{ansible_nodename}} {{sp_register_password}} forcepwreset=yes replstate=enabled
+      delegate_to: localhost
+      ignore_errors: yes
+      tags: register

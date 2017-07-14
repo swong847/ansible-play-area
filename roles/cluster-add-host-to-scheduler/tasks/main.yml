@@ -1,0 +1,78 @@
+---
+  - name: Check if hostgroup already exists
+
+  - name: Create Hostgroup
+    command: qconf -ahgrp @scills
+
+  - name: Create Queue
+
+  - name: Edit Execution Host
+
+  - name: Restart client SGE
+
+
+  - name: register sgeexed file
+    stat: 
+      path: "/etc/init.d/sgeexecd.lifesci"
+    register: sgefile
+    tags:
+      - check    
+
+  - name: Fail if SGE exists
+    fail: msg="SGE is already installed!"
+    when: sgefile.stat.exists == True
+    tags:
+      - check
+
+  - name: Add gridadmin group
+    group: name=gridadmin 
+
+  - name: Add gridadmin user
+    user: name=gridadmin group=gridadmin
+
+  - name: Create UGE installation directory
+    file: path={{ sge_root }} state=directory mode=0755 owner=gridadmin group=gridadmin
+
+  - name: Copy UGE installation files
+    unarchive: src=univa/{{ item }} dest={{ sge_root }} owner=gridadmin group=gridadmin
+    with_items:
+      - ge-{{ uge_version }}-arco.tar.gz
+      - ge-{{ uge_version }}-bin-lx-amd64.tar.gz
+      - ge-{{ uge_version }}-bin-lx-x86.tar.gz
+      - ge-{{ uge_version }}-common.tar.gz
+
+  - name: Set file permissions
+    file: path={{ sge_root }} owner=gridadmin group=gridadmin recurse=yes
+
+  - name: Create UGE {{ sge_cell }} cell directory
+    file: path={{ sge_root }}/{{ sge_cell }} state=directory mode=0755 owner=gridadmin group=gridadmin
+
+  - name: Copy UGE {{ sge_cell }} cell config
+    copy: src=uge-8.0.0p1/ dest={{ sge_root }}/{{ sge_cell }}/common/ owner=gridadmin group=gridadmin
+
+  - name: Copy specific user defaults 
+    copy: src=uge-8.0.0p1/sge_request dest={{ sge_root }}/{{ sge_cell }}/sge_request owner=gridadmin group=gridadmin
+
+  - name: Copy specific config
+    template: src=gridengine.jj2 dest={{ sge_root }}/gridengine.conf owner=gridadmin group=gridadmin
+
+  - name: Run UGE setup
+    shell: "{{ sge_root }}/inst_sge -x -auto {{ sge_root }}/gridengine.conf chdir={{ sge_root }}"
+
+  - name: Copy SGEEXECD
+    command: cp {{ sge_root }}/{{ sge_cell }}/common/sgeexecd /etc/init.d/sgeexecd.lifesci
+
+  - name: chmod UGE init script
+    file: path=/etc/init.d/sgeexecd.lifesci mode=0755
+
+  - name: chkconfig UGE init script
+    command: chkconfig --add sgeexecd.lifesci
+
+  - name: start UGE service
+    service: name=sgeexecd.lifesci state=started
+
+  - name: Install UGE profile scripts
+    command: cp {{ sge_root }}/{{ sge_cell }}/common/settings.{{ item }} /etc/profile.d/gridengine.{{ item }}
+    with_items:
+      - sh
+      - csh

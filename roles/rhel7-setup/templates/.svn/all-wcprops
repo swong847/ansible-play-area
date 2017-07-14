@@ -1,0 +1,53 @@
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/svn/ansible/!svn/ver/34/roles/rhel7-setup/templates
+END
+sssd.conf
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/ansible/!svn/ver/34/roles/rhel7-setup/templates/sssd.conf
+END
+sudoers
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/ansible/!svn/ver/34/roles/rhel7-setup/templates/sudoers
+END
+access.conf
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/ansible/!svn/ver/34/roles/rhel7-setup/templates/access.conf
+END
+ntp.conf
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/ansible/!svn/ver/34/roles/rhel7-setup/templates/ntp.conf
+END
+smb.conf
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/ansible/!svn/ver/34/roles/rhel7-setup/templates/smb.conf
+END
+snmpd.conf
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/ansible/!svn/ver/34/roles/rhel7-setup/templates/snmpd.conf
+END
+krb5.conf
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/ansible/!svn/ver/34/roles/rhel7-setup/templates/krb5.conf
+END
+rhsm.conf
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/ansible/!svn/ver/34/roles/rhel7-setup/templates/rhsm.conf
+END

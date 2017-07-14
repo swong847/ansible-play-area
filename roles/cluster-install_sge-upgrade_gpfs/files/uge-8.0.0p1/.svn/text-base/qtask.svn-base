@@ -1,0 +1,29 @@
+#
+# (c) 2008 Sun Microsystems, Inc. All rights reserved. Use is subject to license terms.  
+
+#
+# This file contains cell wide defaults which commands are
+# to be queued from within a qtcsh session. 
+#
+# See qtask(5) for a detailed description of the file format.
+#
+#
+#
+# Sample #1 redirects certain file io intensive commands 
+# to the fileserver machine.
+#    
+#cat -l file_srv=true -cwd
+#grep -l file_srv=true -cwd
+#egrep -l file_srv=true -cwd
+#
+#
+#
+# Sample #2 redirects certain GUI applications to one of 
+# the machines being configured as application
+# server. The prefixed exclamation mark prevents 
+# overriding of the default redirection for the
+# netscape command.
+#    
+#!netscape -l appl_srv=true -cwd -v DISPLAY
+#soffice -l appl_srv=true -cwd -v DISPLAY
+#

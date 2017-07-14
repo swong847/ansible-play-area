@@ -1,0 +1,17 @@
+K 25
+svn:wc:ra_dav:version-url
+V 42
+/svn/ansible/!svn/ver/34/roles/rhel7-setup
+END
+.travis.yml
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/svn/ansible/!svn/ver/28/roles/rhel7-setup/.travis.yml
+END
+README.md
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/svn/ansible/!svn/ver/34/roles/rhel7-setup/README.md
+END

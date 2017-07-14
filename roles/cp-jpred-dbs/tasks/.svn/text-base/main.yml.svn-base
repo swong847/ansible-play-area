@@ -1,0 +1,77 @@
+---
+# tasks file for roles/cp-jpred-dbs
+
+     - name: jpred | Increase LVM root to maximum
+       lvol:
+         vg: VolGroup00
+         lv: root
+         size: +100%FREE 
+         shrink: no
+       when: "'fc-' in inventory_hostname"
+       tags:
+         - lvm
+
+     - name: jpred | Increase Filesystem
+       filesystem:
+         fstype: ext4
+         dev: /dev/VolGroup00/root
+         opts: -p
+         resizefs: yes
+       when: "'fc-' in inventory_hostname"
+       tags:
+         - lvm
+
+     - name: jpred | Mk ob dir
+       file:
+         path: "/local/gjb_lab/webservices/www-ob"
+         state: directory
+         owner: www-ob
+         group: barton
+         mode: 0754
+       when: "'fc-' in inventory_hostname"
+
+     - name: jpred | Check if DB exists
+       stat: 
+         path: "{{ db_loc }}"
+       register: db_exists
+
+     - name: jpred | Make dir
+#       fail: msg="The database already exists!"
+       file:
+         path: "{{ db_loc }}"
+         state: directory
+         owner: www-jpred
+         group: barton
+         mode: 0754
+       when: db_exists.stat.exists == False
+
+     - name: jpred | Get results
+       shell: "find /cluster/gjb_lab/webservices/www-jpred/databases -maxdepth 1 -name uniref90.* -o -name  uniref* -type f"
+       register: results
+
+     - name: jpred | Copy DATA 
+       synchronize:
+         src: "{{item}}"
+         #src: "/cluster/gjb_lab/webservices/www-jpred/databases/"
+         dest: "{{ db_loc }}" 
+         partial: yes
+       with_items:
+       - "{{ results.stdout_lines }}"
+      #   rsync_opts:
+      #     - "--include=uni90.*"
+      #     - "--exclude=*"
+       delegate_to: "{{ inventory_hostname }}"
+
+     - name: jpred | Copy Maps
+       synchronize:
+         src: "/cluster/gjb_lab/webservices/www-jpred/databases/map/"
+         dest: "{{ db_loc }}/map/"
+         recursive: yes
+         partial: yes
+       delegate_to: "{{ inventory_hostname }}"
+       tags: 
+         - maps
+
+#     - name: jpred | Copy data
+#       shell: cp "/cluster/gjb_lab/webservices/www-jpred/databases/uni90.*" "{{ db_loc }}/" 
+ 

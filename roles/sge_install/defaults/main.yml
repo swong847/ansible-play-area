@@ -1,0 +1,5 @@
+---
+# defaults file for roles/sge_install
+sge_root: /gridware/sge
+sge_cell: default
+uge_version: 8.0.0p1

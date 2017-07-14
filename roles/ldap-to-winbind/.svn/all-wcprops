@@ -1,0 +1,17 @@
+K 25
+svn:wc:ra_dav:version-url
+V 46
+/svn/ansible/!svn/ver/24/roles/ldap-to-winbind
+END
+.travis.yml
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/ansible/!svn/ver/20/roles/ldap-to-winbind/.travis.yml
+END
+README.md
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/svn/ansible/!svn/ver/23/roles/ldap-to-winbind/README.md
+END

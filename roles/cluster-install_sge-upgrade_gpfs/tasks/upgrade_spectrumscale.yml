@@ -117,6 +117,26 @@
      - include: make_kernel.yml
        static: no
 
+#Create symlinks
+     - name: gpfs | set permissions
+       file: 
+         path: "{{item}}"
+         mode: 0755
+       with_items:
+       - /lifesci
+       - /lifesci/groups
+       tags:
+         - links
+
+     - name: gpfs | create symlinks
+       file: 
+         src: /cluster/tohlab
+         dest: /lifesci/groups/toh
+         state: link
+         force: yes
+       tags:
+         - links  
+
 # Start services
 
      - name: gpfs | start gpfs

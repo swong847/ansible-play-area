@@ -1,0 +1,6 @@
+[TSM]
+name=Tivoli Storage Manager Enterprise Packages for Centos 6
+baseurl=http://spacewalk.lifesci.dundee.ac.uk/pub/TSM/x86_64/
+enabled=1
+priority=10
+gpgcheck=0

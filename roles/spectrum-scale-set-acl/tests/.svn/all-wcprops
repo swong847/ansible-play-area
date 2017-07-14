@@ -1,0 +1,17 @@
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/ansible/!svn/ver/28/roles/spectrum-scale-set-acl/tests
+END
+test.yml
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/ansible/!svn/ver/28/roles/spectrum-scale-set-acl/tests/test.yml
+END
+inventory
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/ansible/!svn/ver/28/roles/spectrum-scale-set-acl/tests/inventory
+END
