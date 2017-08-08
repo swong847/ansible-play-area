@@ -1,0 +1,7 @@
+---
+#- hosts: 
+- hosts: "{{ target }}"
+  roles: 
+    - cluster-app-python-drmaa
+
+

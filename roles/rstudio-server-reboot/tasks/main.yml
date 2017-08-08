@@ -1,0 +1,27 @@
+---
+# tasks file for roles/rstudio-server-reboot
+- name: Reboot Rstudio
+  command: /usr/sbin/shutdown -r now
+  become: true
+ # become_user: root
+  tags: 
+    - reboot
+  ignore_errors: true
+
+- name: Wait for RStudio to come back online
+  local_action:
+    module: wait_for
+      host={{ inventory_hostname }}
+      port=22
+      delay=60
+      timeout=120
+  tags:
+    - reboot
+
+- name: Mount filesysmte
+  command: /usr/lpp/mmfs/bin/mmstartup
+  become: true
+
+- name: Start the Shiny service
+  command: systemctl restart shiny-server
+  become: true

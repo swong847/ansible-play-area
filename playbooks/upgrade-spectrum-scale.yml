@@ -1,0 +1,8 @@
+---
+#- hosts: 
+- hosts: "{{ target }}"
+  roles: 
+    - upgrade-spectrum-scale
+
+  gather_facts: true
+

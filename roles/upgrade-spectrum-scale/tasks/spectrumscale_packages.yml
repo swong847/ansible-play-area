@@ -1,0 +1,25 @@
+---
+
+     - name: gpfs | Upgrade rpms
+       yum:
+         name: "{{ item }}"
+         state: latest
+         enablerepo: gpfs-updates
+         disable_gpg_check: yes
+       with_items:
+       - gpfs.base
+       - gpfs.docs
+       - gpfs.gpl
+       - gpfs.msg.en_US
+
+     - name: gpfs | install gpfs gskit
+       yum:
+         name: "{{ item }}"
+         state: latest
+         enablerepo: gpfs-updates
+         disable_gpg_check: yes
+       with_items:
+       - gpfs.gskit
+       tags:
+         - baseGPFS
+       ignore_errors: true

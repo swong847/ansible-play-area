@@ -1,4 +1,9 @@
 #File for test-hosts
+[ningal]
+ningal.cluster
+
+[rstudio]
+rstudio
 
 [gjb]
 gjb-vsmp-1.cluster
@@ -90,8 +95,11 @@ c6100-4-1.cluster
 c6100-4-2.cluster
 c6100-4-3.cluster
 c6100-5-1.cluster
-c6100-5-3.cluster
 c6100-5-2.cluster
+c6100-5-3.cluster
+c6100-5-4.cluster
+c6100-6-1.cluster
+c6100-6-2.cluster
 c6100-6-3.cluster
 c6100-6-4.cluster
 c6100-7-1.cluster
@@ -104,6 +112,7 @@ c6100-8-4.cluster
 c6100-8-3.cluster
 c6100-9-1.cluster
 c6100-9-2.cluster
+c6100-9-3.cluster
 c6100-9-4.cluster
 c6100-10-1.cluster
 c6100-10-2.cluster
@@ -169,7 +178,7 @@ mysql.brenkgroup
 xibo-live.lifesci.dundee.ac.uk
 
 [lmf]
-bumblebee.lifesci.dundee.ac.uk
+ishkur-3.lifesci.dundee.ac.uk
 
 [systems]
 10.0.70.23

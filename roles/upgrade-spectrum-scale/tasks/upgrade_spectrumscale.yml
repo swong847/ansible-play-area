@@ -1,0 +1,130 @@
+---
+# Fail playbook if GPFS / Specturm Scale exists
+     - include: fail_playbook.yml
+       static: no
+
+# Stop Services
+     - name: upgrade spectrum scale | register if sge exists
+       stat:
+         path: "/etc/init.d/sgeexecd.lifesci"
+       register: sge_exists
+
+     - name: upgrade spectrum scale | stop SGE
+       command: /etc/init.d/sgeexecd.lifesci stop
+       when: sge_exists.stat.exists == True
+
+# Unmount the filesystem
+     - name: upgrade spectrum scale | unmount filesystem if /cluster is mounted
+       command: /usr/lpp/mmfs/bin/mmshutdown  
+       with_items: 
+       - "{{ ansible_mounts }}"
+       when: (item.mount == '/cluster' or item.mount == '/gpfs_lmf' and ansible_distribution_major_version < "7")
+       #ignore_errors: true
+       tags:
+         - removeSS
+
+     - name: upgrade spectrum scale | stop gpfs
+       command: /etc/init.d/gpfs stop
+       when: ansible_distribution_major_version < "7"
+       #ignore_errors: true
+       tags:
+         - removeSS
+
+#
+# Create task to stop/unmount if systemD
+#
+
+     - name: upgrade spectrum scale | remove gpfs
+       yum:
+         name: "{{item}}"
+         state: absent
+       with_items:
+       - gpfs.base
+       - gpfs.gplbin
+       - gpfs.docs
+       - gpfs.gpl
+       - gpfs.msg.en_US  
+       tags:
+         - removeSS
+ 
+# Restart server
+     - name: upgrade spectrum scale | reboot server
+       command: shutdown -r now
+       tags:
+         - reboot
+
+     - name: upgrade spectrum scale | wait for server to come back online
+       local_action:
+         module: wait_for 
+           host={{ inventory_hostname }}
+           port=22
+           delay=180
+           timeout=600
+       tags:
+         - reboot
+
+# Install GPFS
+     
+     - include: setup_repo.yml
+       static: no
+       tags:
+         - installSS
+
+     - name: upgrade spectrum scale | clean repo
+       command: yum update ; yum clean all
+
+     - name: upgrade spectrum scale | install base core rpms
+       yum:
+         name: "{{ item }}"
+         state: present
+         enablerepo: gpfs-base
+         disable_gpg_check: yes
+       with_items:
+       - gpfs.base-{{ gpfs_base }}
+       - gpfs.docs-{{ gpfs_base }}
+       - gpfs.gpl-{{ gpfs_base }}
+       - gpfs.msg.en_US-{{ gpfs_base}}
+       tags:
+         - baseGPFS
+
+     - name: upgrade spectrum scale  | install gpfs gskit
+       yum:
+         name: "{{ item }}"
+         state: present
+         enablerepo: gpfs-base
+         disable_gpg_check: yes
+       with_items:
+       - gpfs.gskit-{{ gskit_ver }}
+       tags:
+         - baseGPFS
+       ignore_errors: true
+
+
+#Build gpfs kernel
+     - include: make_kernel.yml
+       static: no
+       tags:
+         - baseGPFS
+
+# Upgrade GPFS to latest minor version
+     - include: spectrumscale_packages.yml
+       static: no
+
+#Build gpfs kernel
+
+     - include: make_kernel.yml
+       static: no
+
+# Start services
+
+     - name: gpfs | start gpfs
+       command: /usr/lpp/mmfs/bin/mmstartup
+
+     - name: gpfs | start sge
+       command: /etc/init.d/sgeexecd.lifesci start
+
+     - name: gpfs | register gpfs upgrade 
+       file:
+         path: /usr/lpp/mmfs/.ansible-upgrade-{{gpfs_minor_update}}
+         state: touch
+       when: file_exists.stat.exists == False

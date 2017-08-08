@@ -1,0 +1,11 @@
+---
+#- hosts: 
+- hosts: "{{ target }}"
+  roles: 
+    - spectrum-scale_quota
+
+  vars_prompt:
+    - name: "fileset_name"
+      prompt: "Enter the fileset name you plan to query"
+      default: ""
+      private: no

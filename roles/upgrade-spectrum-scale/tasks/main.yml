@@ -1,0 +1,5 @@
+---
+# tasks file for roles/upgrade-spectrum-scale
+
+    - include: upgrade_spectrumscale.yml
+      static: no

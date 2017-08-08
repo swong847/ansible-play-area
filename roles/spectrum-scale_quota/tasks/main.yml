@@ -1,0 +1,4 @@
+---
+# tasks file for roles/spectrum-scale_quota
+- name: Check fileset quota
+  tags: check

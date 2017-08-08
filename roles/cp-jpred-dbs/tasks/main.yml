@@ -7,7 +7,8 @@
          lv: root
          size: +100%FREE 
          shrink: no
-       when: "'fc-' in inventory_hostname"
+       when: ("'fc-' in inventory_hostname") or
+             ("'c6100-' in inventory_hostname")
        tags:
          - lvm
 
@@ -17,7 +18,8 @@
          dev: /dev/VolGroup00/root
          opts: -p
          resizefs: yes
-       when: "'fc-' in inventory_hostname"
+       when: ("'fc-' in inventory_hostname") or
+             ("'c6100-' in inventory_hostname")
        tags:
          - lvm
 
