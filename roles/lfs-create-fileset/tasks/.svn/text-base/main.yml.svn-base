@@ -1,3 +1,0 @@
----
-    - include: create-fileset.yml
-      static: no

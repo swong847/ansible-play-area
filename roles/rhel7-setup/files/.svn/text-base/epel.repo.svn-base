@@ -1,8 +1,0 @@
-[Epel]
-
-name=Epel
-baseurl=http://spacewalk.lifesci.dundee.ac.uk/pub/epel/el7/x86_64/
-enabled=1
-gpgcheck=1
-gpgkey=http://spacewalk.lifesci.dundee.ac.uk/pub/RPM-GPG-KEY-EPEL-7
-

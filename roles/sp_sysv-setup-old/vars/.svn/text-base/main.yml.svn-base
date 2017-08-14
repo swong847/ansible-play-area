@@ -1,4 +1,0 @@
----
-    sysvFiles: "misc/sp/sysv"
-    sysdFiles: "misc/sp/sysd"
-    serviced: "dsmcad"

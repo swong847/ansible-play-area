@@ -1,55 +1,0 @@
-10
-
-dir
-42
-https://svn.lifesci.dundee.ac.uk/svn/ansible/roles
-https://svn.lifesci.dundee.ac.uk/svn/ansible
-
-
-
-2017-06-13T11:39:53.454449Z
-42
-swong
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-47febb5e-de21-469c-aa38-3ce0e70e8936
-
-rhel7-setup
-dir
-
-sp_sysv-setup-old
-dir
-
-spectrum-protect
-dir
-
-cluster-install_sge-upgrade_gpfs
-dir
-
-ldap-to-winbind
-dir
-
-cp-jpred-dbs
-dir
-
-sp_uninstall
-dir
-
-spectrum-scale-set-acl
-dir
-
-lfs-create-fileset
-dir
-

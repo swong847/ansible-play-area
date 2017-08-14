@@ -1,5 +1,0 @@
----
-# defaults file for roles/cp-jpred-dbs
-
-db_loc: "/local/gjb_lab/webservices/www-jpred/databases"
-

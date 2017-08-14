@@ -1,6 +1,0 @@
----
-
-     - name: gpfs | setup repository
-       template:
-         dest: /etc/yum.repos.d/gpfs.repo
-         src: gpfs-repo.j2
