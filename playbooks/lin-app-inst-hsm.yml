@@ -1,0 +1,8 @@
+---
+#- hosts: 
+- hosts: "{{ target }}"
+  roles: 
+    - lin-app-inst-hsm
+  vars:
+    env:
+      HSMINSTALLMODE: "SCOUTFREE"

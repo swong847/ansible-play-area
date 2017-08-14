@@ -1,0 +1,29 @@
+---
+# tasks file for roles/lin-app-inst-hsm
+
+- name: Setup the Repo
+  copy: src=hsm.repo dest=/etc/yum.repos.d/hsm.repo force=no
+  become: true
+  become: su
+
+- name: Check if HSM is installed
+  yum:
+    list=TIVsm-HSM
+  register: is_installed
+
+#- name: Set HSM export 
+#  shell: export HSMINSTALLMODE=SCOUTFREE
+
+- name: Add line to dsm.opt file
+  lineinfile:
+    path: /opt/tivoli/tsm/client/ba/bin/dsm.opt
+    line: 'HSMDISABLEAUTOMIGDAEMONS  yes'
+
+- name: Install HSM if not exist
+  yum: 
+    name: TIVsm-HSM
+    state: latest
+  when: (is_installed.results|length == 1) or (is_installed.results[1].yumstate != 'installed')
+  become: true
+  become: su
+  environment: "{{ env }}"

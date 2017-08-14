@@ -1,0 +1,7 @@
+[TSM]
+name=HSM Storage Manager Enterprise Packages for Enterprise Linux 7
+baseurl=http://spacewalk.lifesci.dundee.ac.uk/pub/HSM/space81/
+enabled=1
+priority=10
+gpgcheck=0 
+
