@@ -3,21 +3,9 @@
 # Purpose: The purpose of this playbook is to disable ldap and configure winbind 
 # Actions: disable nscd, install samba, copy the file, bind and restart winbind
 ---
-- hosts: mysql
-  become: true
-
-  tasks:
-  - name: Change ssh permit login
-    lineinfile: dest=/etc/ssh/sshd_config
-                regexp="^PermitRootLogin"
-                line="PermitRootLogin yes"
-                state=present
-  - service:  
-      name: sshd 
-      state: restarted     
-
 # Run the main role
-- hosts: mysql
+- hosts: all
+  become: yes
   roles:
     - ldap-to-winbind
   
