@@ -1,0 +1,13 @@
+---
+# tasks file for roles/cluster-app-python-multiqc
+
+- name: Pip install MULTIQC
+  shell: source /etc/profile.d/modules.sh ; module load python/{{item}} ; pip install multiqc ; module unload python/{{ "item" }}
+  with_items:
+    - "2.6.4"
+    - "2.6.6"
+    - "2.7.3"
+    - "2.7.12"
+  become: true
+  #become_method: su
+  become_user: hpc-sw-x
