@@ -1,0 +1,6 @@
+[hsm-space711]
+name=HSM Repository
+baseurl=http://spacewalk.lifesci.dundee.ac.uk/pub/HSM/space711/
+enabled=1
+gpgcheck=0
+

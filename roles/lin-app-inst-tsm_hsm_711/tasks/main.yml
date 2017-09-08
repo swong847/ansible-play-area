@@ -1,0 +1,41 @@
+---
+# tasks file for roles/linx-app-inst-tsm_hsm_711
+
+    - name: Make copy of dsm.opt
+      command: cp /opt/tivoli/tsm/client/ba/bin/dsm.opt /root/dsm.opt.bkup
+      tags: copy
+
+    - name: Make copy of dsm.sys
+      command: cp /opt/tivoli/tsm/client/ba/bin/dsm.sys /root/dsm.sys.bkup
+      tags: copy
+
+    - name: Uninstall SP & HSM Packages
+      yum:
+        name: "{{ item }}"
+        state: absent
+      with_items:
+      - gskcrypt64.x86_64
+      - gskssl64.x86_64
+      - TIVsm-API64
+      - TIVsm-BA
+      - TIVsm-HSM
+      tags: uninstall
+
+
+    - name: Setup the Repo
+      copy: src=hsm.repo dest=/etc/yum.repos.d/hsm.repo force=yes
+      tags: install
+
+    - name: Install SP Packages
+      yum:
+        name: "{{ item }}"
+        state: present
+        enablerepo: hsm-space711
+        disable_gpg_check: yes
+      with_items:
+       #- gskcrypt64.x86_64
+       #- gskssl64.x86_64
+       #- TIVsm-API64
+       #- TIVsm-BA
+       - TIVsm-HSM
+      tags: install
