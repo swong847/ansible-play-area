@@ -1,0 +1,70 @@
+---
+# tasks file for roles/software-stardrop
+
+- name: register if archive exists
+  stat:
+    path: "/usr/local/StarDrop.{{ ansible_date_time.date }}.tar"
+  register: file_exists
+
+- name: Archive files
+  archive:
+    path: /usr/local/StarDrop
+    dest: /usr/local/StarDrop.{{ ansible_date_time.date }}.tar
+  when: file_exists.stat.exists == False
+  tags:
+    - backup
+
+- name: Copy config files
+  shell: cp /usr/local/StarDrop/sls/var/run/sls.conf /tmp/sls.conf.{{ ansible_date_time.date }} ; cp /usr/local/StarDrop/ims/bin/models.py  /tmp/models.py.{{ ansible_date_time.date }}
+  tags:
+    - backup
+
+- name: Stop services
+  shell: /etc/init.d/{{ item }} stop
+  with_items:
+    - StarDrop_amg
+    - StarDrop_ims
+    - StarDrop_p450
+    - StarDrop_sls
+    - StarDrop_modelserver
+  tags:
+    - stop_service
+  ignore_errors: yes
+
+
+- name: register if installer exists
+  stat:
+    path: "/tmp/stardrop_installer-{{ ansible_date_time.date }}"
+  register: installer_exists
+
+
+- name: Copy install directory / download install directory
+  copy:
+    src: stardrop_installer
+    dest: /tmp/stardrop_installer-{{ ansible_date_time.date }}
+    mode: 0775
+  when: installer_exists.stat.exists == False
+  tags:
+    - copy_installer
+
+- name: Install Stardrop
+  command: ./install_stardrop_servers.py
+  args:
+    chdir: /tmp/stardrop_installer-{{ ansible_date_time.date }}/stardrop_installer
+  tags:
+    - install
+
+- name: Copy config files Backup
+  shell: cp /tmp/sls.conf.{{ ansible_date_time.date }} /usr/local/StarDrop/sls/var/run/sls.conf ; cp /tmp/models.py.{{ ansible_date_time.date }} /usr/local/StarDrop32/modelserver/bin/service/models.py
+
+- name: Stop services
+  shell: /etc/init.d/{{ item }} start
+  with_items:
+    - StarDrop_amg
+    - StarDrop_ims
+    - StarDrop_p450
+    - StarDrop_sls
+    - StarDrop_modelserver
+  tags:
+    - start_service
+  ignore_errors: yes
