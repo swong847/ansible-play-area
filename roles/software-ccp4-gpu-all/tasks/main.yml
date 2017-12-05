@@ -1,0 +1,11 @@
+---
+# tasks file for roles/software-ccp4-gpu-all
+- name: Install CCP4 dependencies
+  yum: name={{ item }} state=latest
+  with_items: "{{ ccp4_depend }}"
+  tags: yum
+
+- name: Install Coot dependencies
+  yum: name={{ item }} state=latest
+  with_items: "{{ coot_depend }}"
+  tags: yum

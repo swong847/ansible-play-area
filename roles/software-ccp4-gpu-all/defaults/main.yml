@@ -1,0 +1,27 @@
+---
+# defaults file for roles/software-ccp4-gpu-all
+ccp4_depend:
+  - bzr
+  - make
+  - cmake
+  - wget
+  - gcc-c++
+  - gcc-gfortran
+  - m4
+  - patch
+  - qt-devel
+  - qtwebkit-devel
+  - python-devel
+  - java-devel
+  - libxml2-devel
+  - fontconfig-devel
+  - libXt-devel
+  - libXrender-devel
+  - libXinerama-devel
+  - libXaw-devel swig
+
+coot_depend:
+  - xz
+  - intltool
+  - mesa-libGLU-devel
+  - libXmu-devel
